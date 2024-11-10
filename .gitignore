@@ -1,0 +1,13 @@
+.DS_Store
+.venv/
+.idea/
+.vscode/
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.tfstate.lock.info
+__pycache__/
+*.pyc
+db.sqlite3
+.tfvars

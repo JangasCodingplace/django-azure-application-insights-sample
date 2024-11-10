@@ -1,0 +1,37 @@
+name: 🔒 Workflow Call - Linting
+
+on:
+  workflow_call:
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+
+      - name: Setup Poetry and install dependencies
+        run: |
+          pip install poetry
+          poetry install --no-interaction
+
+      - name: Run ruff
+        run: |
+          poetry run ruff check ./app
+
+      - name: Run black
+        run: |
+          poetry run black --check ./app
+
+      - name: Run isort
+        run: |
+          poetry run isort --profile black --check ./app
+
+      - name: Run mypy
+        run: |
+          poetry run mypy ./app

@@ -1,0 +1,28 @@
+# Which location should be used per default. Default value set to `germanywestcentral` in `variables.tf`
+# AZURE_DEFAULT_REGION =
+
+# Azure Subscription ID to use for the deployment. Required for provider information
+AZURE_SUBSCRIPTION_ID = "00000000-0000-0000-0000-000000000000"
+
+# Hyphen-seperated and lowercase Project name to use for the deployment.
+# The resource group will be named in following pattern: `${PROJECT_NAME}-${ENV}-rg`
+PROJECT_NAME = "dj-app-insights-setup"
+
+# SKU name for the App Service Plan. Default value set to `B1` in `variables.tf`
+# AZURE_SERVICE_PLAN__SKU_NAME =
+
+# Docker Container registry URI i.e. `mycompany.azurecr.io`
+DOCKER_CONTAINER_REGISTRY_URI =
+
+# Docker Container registry username which will be used to pull the images
+DOCKER_CONTAINER_REGISTRY_USERNAME =
+
+# Docker Container registry password which will be used to pull the images
+DOCKER_CONTAINER_REGISTRY_PASSWORD =
+
+# name for the repository in the container registry. If github actions is used for pushing the image,
+# the repository name should be the same as the repository name in github
+DJANGO_CONTAINER_REGISTRY_NAME = "dj-app-insights-setup"
+
+# Tag for the image in the container registry. Default value set to `latest` in `variables.tf`
+# DJANGO_CONTAINER_REGISTRY_TAG =

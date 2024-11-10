@@ -1,0 +1,26 @@
+name: 2 - Deployment Workflow
+run-name: Build and Deploy from branch ${{ github.ref_name }} with tag ${{ inputs.tag }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag for the image'
+        required: true
+        default: 'latest'
+
+jobs:
+  linting:
+    uses: ./.github/workflows/lint.yml
+  build-and-push:
+    needs: [linting]
+    uses: ./.github/workflows/build-and-push.yml
+    permissions:
+      id-token: write
+      contents: read
+    with:
+      tag: ${{ inputs.tag }}
+    secrets:
+      CONTAINER_REGISTRY_PASSWORD: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
+      CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
+      CONTAINER_REGISTRY_USERNAME: ${{ secrets.CONTAINER_REGISTRY_USERNAME }}

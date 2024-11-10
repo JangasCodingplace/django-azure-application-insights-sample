@@ -1,0 +1,34 @@
+name: 🔒 Workflow Call - build and push the Image
+
+on:
+  workflow_call:
+    secrets:
+      CONTAINER_REGISTRY:
+      CONTAINER_REGISTRY_USERNAME:
+      CONTAINER_REGISTRY_PASSWORD:
+
+    inputs:
+      tag:
+        description: 'Tag for the image'
+        required: true
+        type: string
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Login to Azure Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.CONTAINER_REGISTRY }}
+          username: ${{ secrets.CONTAINER_REGISTRY_USERNAME }}
+          password: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
+
+      - name: Build and push container image to registry
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: "${{ secrets.CONTAINER_REGISTRY }}/${{ github.event.repository.name }}:${{ inputs.tag }}"

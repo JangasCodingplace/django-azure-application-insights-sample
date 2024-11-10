@@ -1,0 +1,8 @@
+name: 1 - Push Workflow
+
+on:
+  push:
+
+jobs:
+  testing-and-linting:
+    uses: ./.github/workflows/lint.yml
